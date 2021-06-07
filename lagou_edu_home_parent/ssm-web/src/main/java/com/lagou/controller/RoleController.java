@@ -1,8 +1,6 @@
 package com.lagou.controller;
 
-import com.lagou.domain.ResponseResult;
-import com.lagou.domain.Role;
-import com.lagou.domain.RoleMenuVo;
+import com.lagou.domain.*;
 import com.lagou.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,5 +50,23 @@ public class RoleController {
     public ResponseResult deleteRole(int id){
         roleService.deleteRole(id);
         return new ResponseResult(true,200,"删除角色成功","");
+    }
+
+    /*
+        获取角色拥有的资源信息
+     */
+    @RequestMapping("/findResourceListByRoleId")
+    public ResponseResult findResourceListByRoleId(int roleId){
+        List<Resource> resourceList = roleService.findResourceListByRoleId(roleId);
+        return new ResponseResult(true,200,"获取角色拥有的资源信息成功",resourceList);
+    }
+
+    /*
+        为角色分配菜单
+     */
+    @RequestMapping("/roleContextResource")
+    public ResponseResult roleContextResource(@RequestBody RoleResourceVo roleResourceVo){
+        roleService.roleContextResource(roleResourceVo);
+        return new ResponseResult(true,200,"为角色分配菜单成功",null);
     }
 }

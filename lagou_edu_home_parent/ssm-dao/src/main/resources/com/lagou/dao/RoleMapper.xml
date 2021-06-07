@@ -35,4 +35,27 @@
         delete from roles where id = #{rid}
     </delete>
 
+    <!--获取角色拥有的资源信息 public List<Resource> findRoleResource(Integer roleId);-->
+    <select id="findResourceListByRoleId" parameterType="int" resultType="com.lagou.domain.Resource">
+        SELECT DISTINCT
+          re.*
+        FROM
+          resource re
+          INNER JOIN role_resource_relation rr
+            ON re.id = rr.resource_id
+          INNER JOIN roles ro
+            ON ro.id = rr.role_id
+        WHERE ro.id = #{roleId}
+    </select>
+
+    <!--根据角色id清空角色菜单关联表关系信息 public void deleteRoleContextResource(Integer roleId);-->
+    <delete id="deleteRoleContextResource" parameterType="int">
+        delete from role_resource_relation where role_id = #{roleId}
+    </delete>
+
+    <!--为角色分配菜单 public void roleContextResource(Role_Resource_Relation role_resource_relation);-->
+    <insert id="roleContextResource" parameterType="com.lagou.domain.Role_Resource_Relation">
+        insert into role_resource_relation values(null,#{resourceId},#{roleId},#{createdTime},
+        #{updatedTime},#{createdBy},#{updatedBy})
+    </insert>
 </mapper>
