@@ -39,8 +39,14 @@ public class UserController {
      */
     @RequestMapping("/updateUserStatus")
     public ResponseResult updateUserStatus(int id, String status){
+        if("ENABLE".equalsIgnoreCase(status)){
+            status = "DISABLE";
+        }else{
+            status = "ENABLE";
+        }
         userService.updateUserStatus(id,status);
-        return new ResponseResult(true,200,"修改用户状态成功",status);
+        ResponseResult responseResult = new ResponseResult(true,200,"修改用户状态成功",status);
+        return responseResult;
     }
 
     /*

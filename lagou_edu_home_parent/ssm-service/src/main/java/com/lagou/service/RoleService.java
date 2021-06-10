@@ -35,4 +35,15 @@ public interface RoleService {
         为角色分配菜单
      */
     void roleContextResource(RoleResourceVo roleResourceVo);
+
+    /*
+        添加角色
+     */
+    public void saveRole(Role role);
+
+    /*
+        修改角色
+     */
+    public void updateRole(Role role);
+
 }

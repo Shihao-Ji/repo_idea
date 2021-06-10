@@ -58,4 +58,43 @@
         insert into role_resource_relation values(null,#{resourceId},#{roleId},#{createdTime},
         #{updatedTime},#{createdBy},#{updatedBy})
     </insert>
+
+    <!--添加角色  public void saveRole(Role role);-->
+    <insert id="saveRole" parameterType="com.lagou.domain.Role">
+        insert into roles values(null,#{code},#{name},#{description},#{createdTime},#{updatedTime},
+        #{createdBy},#{updatedBy})
+    </insert>
+
+    <!--修改角色  public void updateRole(Role role);-->
+    <update id="updateRole" parameterType="com.lagou.domain.Role">
+        update roles
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="code != null and code != ''">
+                code = #{code},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy},
+            </if>
+        </trim>
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+    </update>
 </mapper>

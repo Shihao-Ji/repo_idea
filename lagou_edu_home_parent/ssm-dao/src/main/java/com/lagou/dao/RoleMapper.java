@@ -48,4 +48,14 @@ public interface RoleMapper {
         为角色分配菜单
      */
     public void roleContextResource(Role_Resource_Relation role_resource_relation);
+
+    /*
+        添加角色
+     */
+    public void saveRole(Role role);
+
+    /*
+        修改角色
+     */
+    public void updateRole(Role role);
 }

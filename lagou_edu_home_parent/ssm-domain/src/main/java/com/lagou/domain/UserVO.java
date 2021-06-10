@@ -62,6 +62,7 @@ public class UserVO {
         this.username = username;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date getStartCreateTime() {
         return startCreateTime;
     }
@@ -70,6 +71,7 @@ public class UserVO {
         this.startCreateTime = startCreateTime;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date getEndCreateTime() {
         return endCreateTime;
     }

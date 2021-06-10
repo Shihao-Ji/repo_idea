@@ -69,4 +69,18 @@ public class RoleController {
         roleService.roleContextResource(roleResourceVo);
         return new ResponseResult(true,200,"为角色分配菜单成功",null);
     }
+
+    /*
+        添加或修改角色信息
+     */
+    @RequestMapping("/saveOrUpdateRole")
+    public ResponseResult saveOrUpdateRole(@RequestBody Role role){
+        if (role.getId()!=null) {
+            roleService.updateRole(role);
+            return new ResponseResult(true,200,"修改角色成功",null);
+        } else {
+            roleService.saveRole(role);
+            return new ResponseResult(true,200,"添加角色成功",null);
+        }
+    }
 }
