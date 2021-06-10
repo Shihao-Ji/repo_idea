@@ -67,4 +67,17 @@ public class Role_menu_relation {
     public void setUpdatedby(String updatedby) {
         this.updatedby = updatedby;
     }
+
+    @Override
+    public String toString() {
+        return "Role_menu_relation{" +
+                "id=" + id +
+                ", menuId=" + menuId +
+                ", roleId=" + roleId +
+                ", createdTime=" + createdTime +
+                ", updatedTime=" + updatedTime +
+                ", createdBy='" + createdBy + '\'' +
+                ", updatedby='" + updatedby + '\'' +
+                '}';
+    }
 }

@@ -17,7 +17,7 @@
         SELECT m.id FROM
             roles r INNER JOIN role_menu_relation rm ON r.id=rm.role_id
             INNER JOIN menu m ON rm.menu_id=m.id
-        WHERE r.id=2
+        WHERE r.id=#{id}
     </select>
 
     <!--清空角色菜单中间表的关联关系-->
@@ -34,6 +34,29 @@
     <delete id="deleteRole" parameterType="int">
         delete from roles where id = #{rid}
     </delete>
+
+    <!--获取角色拥有的资源分类id集合 public List<Integer> findResourceCategoryIdsByRoleId(Integer roleId);-->
+    <select id="findResourceCategoryIdsByRoleId" parameterType="int" resultType="int">
+        SELECT DISTINCT
+          re.category_id
+        FROM
+          resource re
+          INNER JOIN role_resource_relation rr
+            ON re.id = rr.resource_id
+          INNER JOIN roles ro
+            ON ro.id = rr.role_id
+        WHERE ro.id = #{roleId}
+    </select>
+
+    <!--获取角色拥有的资源分类信息 public List<ResourceCategory> findResourceCategoryListByIds(List<Integer> ids);-->
+    <select id="findResourceCategoryListByIds" parameterType="list" resultType="com.lagou.domain.ResourceCategory">
+        select * from resource_category
+        <where>
+            <foreach collection="list" open="id in (" close=")" item="category_id" separator=",">
+                #{category_id}
+            </foreach>
+        </where>
+    </select>
 
     <!--获取角色拥有的资源信息 public List<Resource> findRoleResource(Integer roleId);-->
     <select id="findResourceListByRoleId" parameterType="int" resultType="com.lagou.domain.Resource">

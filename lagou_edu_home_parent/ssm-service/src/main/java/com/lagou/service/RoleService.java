@@ -29,7 +29,7 @@ public interface RoleService {
     /*
         获取角色拥有的资源信息
      */
-    public List<Resource> findResourceListByRoleId(Integer roleId);
+    public List<ResourceCategory> findResourceListByRoleId(Integer roleId);
 
     /*
         为角色分配菜单

@@ -26,4 +26,5 @@ public interface ResourceCategoryMapper {
         删除资源分类
      */
     public void deleteResourceCategory(Integer id);
+
 }

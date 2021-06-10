@@ -6,6 +6,7 @@ import com.lagou.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Service
@@ -26,7 +27,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void RoleContextMenu(RoleMenuVo roleMenuVo) {
+
         roleMapper.deleteRoleContextMenu(roleMenuVo.getRoleId());
+
         for (Integer mid : roleMenuVo.getMenuIdList()) {
             Role_menu_relation role_menu_relation = new Role_menu_relation();
             role_menu_relation.setRoleId(roleMenuVo.getRoleId());
@@ -36,6 +39,7 @@ public class RoleServiceImpl implements RoleService {
             role_menu_relation.setUpdatedTime(date);
             role_menu_relation.setCreatedBy("system");
             role_menu_relation.setUpdatedby("system");
+            System.out.println(role_menu_relation);
             roleMapper.RoleContextMenu(role_menu_relation);
         }
     }
@@ -47,13 +51,32 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Resource> findResourceListByRoleId(Integer roleId) {
+    public List<ResourceCategory> findResourceListByRoleId(Integer roleId) {
+        // 获取角色拥有的所有资源分类id
+        List<Integer> resourceCategoryIds = roleMapper.findResourceCategoryIdsByRoleId(roleId);
+        // 获取角色拥有的所有资源分类
+        List<ResourceCategory> resourceCategoryList = roleMapper.findResourceCategoryListByIds(resourceCategoryIds);
+        // 获取角色拥有的所有资源
         List<Resource> resourceList = roleMapper.findResourceListByRoleId(roleId);
-        return resourceList;
+        // 遍历资源分类list，然后把资源中分类号匹配的资源放进资源分类的resourceList属性中
+        for (ResourceCategory resourceCategory : resourceCategoryList) {
+            List<Resource> resourceList2 = new ArrayList<>();
+            Integer resourceCategoryId = resourceCategory.getId();
+            for (Resource resource : resourceList) {
+                if (resource.getCategoryId() == resourceCategoryId) {
+                    resourceList2.add(resource);
+                }
+            }
+            resourceCategory.setResourceList(resourceList2);
+        }
+        return resourceCategoryList;
     }
 
     @Override
     public void roleContextResource(RoleResourceVo roleResourceVo) {
+
+        roleMapper.deleteRoleContextResource(roleResourceVo.getRoleId());
+
         // 补全信息
         for (Integer resourceId : roleResourceVo.getResourceIdList()) {
             // 声明一个中间表对象接收参数

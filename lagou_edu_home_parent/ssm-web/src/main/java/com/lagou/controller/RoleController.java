@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/role")
@@ -57,8 +59,8 @@ public class RoleController {
      */
     @RequestMapping("/findResourceListByRoleId")
     public ResponseResult findResourceListByRoleId(int roleId){
-        List<Resource> resourceList = roleService.findResourceListByRoleId(roleId);
-        return new ResponseResult(true,200,"获取角色拥有的资源信息成功",resourceList);
+        List<ResourceCategory> resourceCategoryList = roleService.findResourceListByRoleId(roleId);
+        return new ResponseResult(true,200,"获取角色拥有的资源信息成功",resourceCategoryList);
     }
 
     /*

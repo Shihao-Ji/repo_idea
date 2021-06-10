@@ -47,4 +47,5 @@
     <delete id="deleteResourceCategory" parameterType="int">
         delete from resource_category where id=#{id}
     </delete>
+
 </mapper>
