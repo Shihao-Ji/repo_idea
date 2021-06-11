@@ -28,9 +28,9 @@
         select * from menu where parent_id = #{pid}
     </select>
 
-    <!-- 查询菜单列表 -->
+    <!-- 查询菜单列表-->
     <select id="findAllMenu" resultType="com.lagou.domain.Menu">
-        SELECT * FROM menu
+        select * from menu
     </select>
 
     <!--回显菜单信息-->
