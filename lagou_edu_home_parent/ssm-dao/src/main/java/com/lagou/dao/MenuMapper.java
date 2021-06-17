@@ -21,4 +21,18 @@ public interface MenuMapper {
      */
     public Menu findMenuById(int id);
 
+    /*
+        保存菜单
+     */
+    public void saveMenu(Menu menu);
+
+    /*
+        修改菜单
+     */
+    public void updateMenu(Menu menu);
+
+    /*
+        根据id删除菜单
+     */
+    public void deleteMenu(int id);
 }

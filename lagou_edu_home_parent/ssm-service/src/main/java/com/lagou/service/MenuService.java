@@ -22,4 +22,19 @@ public interface MenuService {
         回显菜单信息
      */
     public Menu findMenuById(int id);
+
+    /*
+        保存菜单信息
+     */
+    public void saveMenu(Menu menu);
+
+    /*
+        修改菜单信息
+     */
+    public void updateMenu(Menu menu);
+
+    /*
+        根据id删除菜单
+     */
+    public void deleteMenu(int id);
 }

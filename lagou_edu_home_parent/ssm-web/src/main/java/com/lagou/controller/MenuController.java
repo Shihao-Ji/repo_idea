@@ -22,7 +22,7 @@ public class MenuController {
     private MenuService menuService;
 
     /*
-        查询所有的父子菜单信息(分配菜单的第一个接口)
+        查询所有的父子菜单信息
      */
     @RequestMapping("/findAllMenu")
     public ResponseResult findAllMenu(MenuVO menuVO){
@@ -50,4 +50,28 @@ public class MenuController {
             return new ResponseResult(true,200,"回显修改菜单信息成功",map);
         }
     }
+
+    /*
+        新建或修改菜单
+     */
+    @RequestMapping("/saveOrUpdateMenu")
+    public ResponseResult saveOrUpdateMenu(@RequestBody Menu menu){
+        if (menu.getId() != null){
+            menuService.updateMenu(menu);
+            return new ResponseResult(true,200,"修改菜单信息成功",null);
+        } else {
+            menuService.saveMenu(menu);
+            return new ResponseResult(true,200,"保存菜单信息成功",null);
+        }
+    }
+
+    /*
+        根据id删除菜单
+     */
+    @RequestMapping("/deleteMenu")
+    public ResponseResult deleteMenu(Integer id){
+        menuService.deleteMenu(id);
+        return new ResponseResult(true,200,"删除菜单成功",null);
+    }
+
 }

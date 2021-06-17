@@ -117,5 +117,10 @@ public class RoleServiceImpl implements RoleService {
         roleMapper.updateRole(role);
     }
 
+    @Override
+    public List<Menu> findAllMenu(Integer id) {
+        return roleMapper.findAllMenu(id);
+    }
+
 
 }

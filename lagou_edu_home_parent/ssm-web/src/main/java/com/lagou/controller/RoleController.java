@@ -85,4 +85,16 @@ public class RoleController {
             return new ResponseResult(true,200,"添加角色成功",null);
         }
     }
+
+    /*
+        查询所有的父子菜单信息(分配菜单的第一个接口)
+     */
+    @RequestMapping("/findAllMenu")
+    public ResponseResult findAllMenu(){
+        List<Menu> subMenuListByPid = roleService.findAllMenu(-1);
+        Map<String, Object> map = new HashMap<>();
+        map.put("menuInfo",null);
+        map.put("parentMenuList",subMenuListByPid);
+        return new ResponseResult(true,200,"回显新建菜单信息成功",map);
+    }
 }

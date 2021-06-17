@@ -31,7 +31,7 @@ public class PromotionSpaceController {
      */
     @RequestMapping("/saveOrUpdatePromotionSpace")
     public ResponseResult saveOrUpdatePromotionSpace(@RequestBody PromotionSpace promotionSpace){
-        if (promotionSpace.getUpdateTime() == null) {
+        if (promotionSpace.getId() == null) {
             promotionSpaceService.savePromotionSpace(promotionSpace);
             return new ResponseResult(true,200,"新增广告位成功",null);
         } else {

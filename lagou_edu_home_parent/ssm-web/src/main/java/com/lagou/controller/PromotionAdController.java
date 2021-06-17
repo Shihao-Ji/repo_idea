@@ -25,7 +25,7 @@ public class PromotionAdController {
     /*
         广告分页查询
      */
-    @RequestMapping("/findAllPromotionAdByPage")
+    @RequestMapping("/findAllPromotionAd")
     public ResponseResult findAllPromotionAdByPage(PromotionAdVO promotionAdVO){
         PageInfo<PromotionAd> pageInfo = promotionAdService.findAllPromotionAdByPage(promotionAdVO);
         return new ResponseResult(true,200,"广告分页查询成功",pageInfo);

@@ -120,4 +120,29 @@
             </if>
         </where>
     </update>
+
+    <resultMap id="roleMenuResult" type="com.lagou.domain.Menu">
+
+        <id column="id" property="id"></id>
+        <result column="href" property="href"></result>
+        <result column="icon" property="icon"></result>
+        <result column="name" property="name"></result>
+        <result column="parent_id" property="parentId"></result>
+        <result column="description" property="description"></result>
+        <result column="orderNum" property="order_num"></result>
+        <result column="shown" property="shown"></result>
+        <result column="created_time" property="createdTime"></result>
+        <result column="updated_time" property="updatedTime"></result>
+        <result column="created_by" property="createdBy"></result>
+        <result column="updated_by" property="updatedBy"></result>
+
+        <collection property="subMenuList" ofType="com.lagou.domain.Menu" select="findAllMenu" column="id"></collection>
+
+    </resultMap>
+
+
+    <!--查询所有父子菜单信息-->
+    <select id="findAllMenu" parameterType="int" resultMap="roleMenuResult">
+        select * from menu where parent_id = #{pid}
+    </select>
 </mapper>

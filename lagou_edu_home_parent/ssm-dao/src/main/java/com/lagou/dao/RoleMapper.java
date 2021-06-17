@@ -65,4 +65,9 @@ public interface RoleMapper {
         修改角色
      */
     public void updateRole(Role role);
+
+    /*
+        查询所有的父子菜单信息(分配菜单的第一个接口)
+     */
+    public List<Menu> findAllMenu(Integer id);
 }
