@@ -72,6 +72,9 @@ public class UserController {
             HttpSession session = request.getSession();
             session.setAttribute("access_token",access_token);
             session.setAttribute("user_id",user2.getId());
+            System.out.println("access_token: " + access_token);
+            Object sessionToken = session.getAttribute("access_token");
+            System.out.println("存进session的token: " + sessionToken);
 
             return new ResponseResult(true,1,"用户登录成功",map);
         } else {
@@ -104,13 +107,16 @@ public class UserController {
     public ResponseResult getUserPermisstions(HttpServletRequest request){
         // 获取请求头中的token
         String header_token = request.getHeader("Authorization");
+        System.out.println("请求头中的token: " + header_token);
         // 获取session中的token
         HttpSession session = request.getSession();
         String access_token = (String) session.getAttribute("access_token");
+        System.out.println("获取session中的token: " + access_token);
 
         // 判断
         if (header_token.equalsIgnoreCase(access_token)) {
             Integer user_id = (Integer) session.getAttribute("user_id");
+            System.out.println("user_id : " + user_id);
             ResponseResult responseResult = userService.getUserPermissions(user_id);
             return responseResult;
         } else {
